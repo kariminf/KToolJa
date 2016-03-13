@@ -273,7 +273,7 @@ public class Calculus {
 	 * Recursive method used to search different combinations of a set 
 	 * of elements starting from an element with a maximum number of combinations.
 	 *  
-	 * This method is used by {@link Calculus_T#getCombinations(int, int)}.
+	 * This method is used by {@link CalculusTest#getCombinations(int, int)}.
 	 * 
 	 * @param size the size of the elements set
 	 * @param start starting point
