@@ -33,7 +33,7 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 /**
- * A class for loading jar files
+ * A class for loading jar files as plugins
  * 
  * @author Abdelkrime Aries
  */
@@ -67,12 +67,12 @@ public class JarLoader {
 	 * Gets an instance of the class that implements {@link Info} in the Jar,
 	 * given a language
 	 * 
-	 * @param lang the language code (ISO 639-1); eg. "ar", "cs", "en", "ja"
-	 * @param infoClass the class that extends {@link Info}; 
-	 * eg. {@link PreProcessInfo}
+	 * @param indicator it is used as a mean to detect if the info class is what
+	 * we are looking for
+	 * @param infoClass the class that extends {@link Info}
 	 * @return an instance of "infoClass" specific for the language needed
 	 */
-	public <T extends Info> T getInfoService(String lang, Class<T> infoClass) {
+	public <T extends Info> T getInfoService(String indicator, Class<T> infoClass) {
 
 		if (classLoader == null){
 			//System.out.println("No class loader");
@@ -86,7 +86,7 @@ public class JarLoader {
 		
 		while (it.hasNext()) {
 			info = it.next();
-			if (lang.equals(info.getISO639_1()))
+			if (indicator.equals(info.getIndicator()))
 				return info;
 		}
 
@@ -101,7 +101,7 @@ public class JarLoader {
 	 * @param cls the class representing the service we looking for
 	 * @return an instance of the class that implements a service cls
 	 */
-	public <T> T getLangService(Info info, Class<T> cls) {
+	public <T> T getClassService(Info info, Class<T> cls) {
 
 		if (classLoader == null)
 			return null;
@@ -112,7 +112,7 @@ public class JarLoader {
 		packageName = packageName.substring(0, packageName.lastIndexOf("."));
 
 		{
-			String className = packageName + "." + info.getPrefix()
+			String className = packageName + "." + info.getClassPrefix()
 					+ cls.getSimpleName();
 
 			T service = getServiceByName(className, cls);
@@ -139,6 +139,7 @@ public class JarLoader {
 		try {
 
 			Class<?> cls2 = classLoader.loadClass(className);
+			@SuppressWarnings("unchecked")
 			T service = (T) cls2.newInstance();
 			return service;
 		} catch (ClassNotFoundException e) {
@@ -202,7 +203,7 @@ public class JarLoader {
 
 		File[] jarFiles = preprocessFolder.listFiles(new JarFileFilter());
 
-		if (jarFiles.length < 1)
+		if (jarFiles == null || jarFiles.length < 1)
 			return null;
 
 		URL[] jarURLs = new URL[jarFiles.length];
@@ -234,37 +235,29 @@ public class JarLoader {
 		public boolean accept(File dir, String name) {
 			if (!name.toLowerCase().endsWith(".jar"))
 				return false;
+			
+			String extensionName;
+			String extensionVersion;
+			
 			try {
 				JarFile jf = new JarFile(dir.getPath() + "/" + name);
 				Manifest manifest = jf.getManifest();
 				Attributes attributes = manifest.getMainAttributes();
-				{
-					String extensionName = attributes
-							.getValue("Extension-Name");
-					if (extensionName == null)
-						return false;
-					// System.out.println(jf.getName() + ": extension= "+
-					// extName + ", found="+ extensionName);
-					if (!extensionName.equals(extName))
-						return false;
-
-				}
-
-				{
-					String extensionVersion = attributes
-							.getValue("Specification-Version");
-					if (extensionVersion == null)
-						return false;
-					// System.out.println(jf.getName() + ": extension= "+
-					// extName + ", found="+ extensionName);
-					if (!extensionVersion.equals(extVersion))
-						return false;
-
-				}
-
-			} catch (IOException e) {
+				extensionName = attributes.getValue("Extension-Name");
+				extensionVersion = attributes.getValue("Specification-Version");
+				jf.close();
+			} catch (Exception e) {
 				return false;
-			} catch (IllegalArgumentException e) {
+			}
+			
+			if (extensionName == null || !extensionName.equals(extName)){
+				System.out.println(extensionName + " != " + extName );
+				return false;
+			}
+			
+			if (extensionVersion == null || !extensionVersion.equals(extVersion))
+			{
+				System.out.println(extensionVersion + " != " + extVersion );
 				return false;
 			}
 

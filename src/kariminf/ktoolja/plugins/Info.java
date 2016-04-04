@@ -28,26 +28,10 @@ package kariminf.ktoolja.plugins;
 public interface Info {
 	
 	/**
-	 * Returns the ISO 639-1 language code, for example: "ar", "en", "fr", etc.
 	 * 
-	 * @return the ISO 639-1 language code
+	 * @return An indicator which point us to the right info file
 	 */
-	public String getISO639_1();
-	
-	
-	/**
-	 * Returns the English name of the language, for example "Arabic".
-	 * 
-	 * @return English name of the language
-	 */
-	public String getLangEnglishName();
-	
-	
-	/**
-	 * Returns the original name of the language, for example: "العربية".
-	 * @return language's name with the original alphabet
-	 */
-	public String getLangName();
+	public String getIndicator();
 	
 	
 	/**
@@ -57,6 +41,6 @@ public interface Info {
 	 * 
 	 * @return the prefix of classes
 	 */
-	public String getPrefix();
+	public String getClassPrefix();
 
 }
