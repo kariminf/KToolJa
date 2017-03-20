@@ -19,7 +19,38 @@
 
 // Java plugin to add support for Java
 apply plugin: 'java'
-apply plugin: 'eclipse'
+
+// Gradle java plugin
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// Release version
+version = '1.0.0'
+
+ext.current_Date = getDate()
+
+// Jar creation
+jar {
+    manifest {
+        attributes 'Created-By': System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')',
+                   "Specification-Title"    : "Kariminf Tools for Java",
+                   "Specification-Version"  : version,
+                   "Specification-Vendor"   : "Kariminf",
+                   "Implementation-Title"   : "kariminf.ktoolja",
+                   "Implementation-Version" : version + "-build" + current_Date ,
+                   "Implementation-Vendor"  : "Kariminf",
+                   "Built-With": "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
+                   "Build-Time": current_Date,
+                   "Built-By": project.hasProperty('BF_USER') ? project.getProperty('BF_USER') : System.getProperty('user.name'),
+                   "Built-On": "${InetAddress.localHost.hostName}/${InetAddress.localHost.hostAddress}"
+    }
+}
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
