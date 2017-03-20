@@ -1,5 +1,5 @@
 /*
- * This file is part of AllSummarizer project
+ * This file is part of KToolJa project
  * 
  * Copyright 2015 Abdelkrime Aries <kariminfo0@gmail.com>
  *
