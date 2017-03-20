@@ -1,5 +1,5 @@
 /*
- * This file is part of AllSummarizer project
+ * This file is part of KToolJa project
  * 
  * Copyright 2014-2015 Abdelkrime Aries <kariminfo0@gmail.com>
  *
@@ -44,7 +44,7 @@ public class FileManager {
 	public static void saveFile(String filePath, String content)
 			throws IOException {
 		Writer out = new OutputStreamWriter(new FileOutputStream(filePath), "UTF-8");
-		
+
 		try {
 			out.write(content);
 		} finally {
@@ -52,7 +52,7 @@ public class FileManager {
 		}
 	}
 
-	
+
 	/**
 	 * Reads a textual file and returns its content.
 	 * 
@@ -64,23 +64,29 @@ public class FileManager {
 			String contents = "";
 
 			BufferedReader input = new BufferedReader(new FileReader(f));
-
-			for (String line = input.readLine(); line != null; line = input
-					.readLine()) {
-				contents += " " + line + System.lineSeparator();
+			
+			String line = input.readLine();
+			
+			while (line != null){
+				contents += line;
+				line = input.readLine();
+				if (line != null) 
+					contents += System.lineSeparator();
 			}
+
 			input.close();
 
 			return contents;
 
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.exit(1);
+			//e.printStackTrace();
+			//System.exit(1);
+			System.err.println("Input/Output problem");
 			return null;
 		}
 	}
 
-	
+
 	/**
 	 * Creates a folder
 	 * 
@@ -92,6 +98,7 @@ public class FileManager {
 		File dir = new File(dirName);
 
 		if (dir.exists()) {
+			System.err.println("The directory already exists");
 			// System.out.println("The directory already exists");
 			return false;
 		}
@@ -99,12 +106,33 @@ public class FileManager {
 		try {
 			dir.mkdirs();
 		} catch (SecurityException se) {
-			System.out.println("Can't create the directory!!");
+			System.err.println("Can't create the directory!!");
+			//System.out.println("Can't create the directory!!");
 			return false;
 		}
-		
-		System.out.println("folder" + dirName + "created");
 
+		//System.out.println("folder" + dirName + "created");
+
+		return true;
+	}
+	
+	public static boolean deleteFolder(File dir, boolean force){
+		
+		if (! dir.exists()) return false;
+		if (! dir.isDirectory()) return false;
+		
+		File[] files = dir.listFiles();
+		
+		if (!force && files.length > 0) return false;
+		
+		for(File file: files){
+			if(file.isDirectory()){
+				deleteFolder(file, true);
+				continue;
+			}
+			file.delete();
+		}
+		dir.delete();
 		return true;
 	}
 
