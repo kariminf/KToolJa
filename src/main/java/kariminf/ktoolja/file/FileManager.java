@@ -30,16 +30,14 @@ import java.io.Writer;
  * This class is used to manage files
  * 
  * @author Abdelkrime Aries
- * 
  */
 public class FileManager {
 
 	/**
-	 * Saves a string into a specific file path.
-	 * 
-	 * @param filePath file's path
-	 * @param content the content to be saved
-	 * @throws IOException when writing the file
+	 * Save a text into a specified file
+	 * @param filePath The path of the destiation file
+	 * @param content The content to be saved
+	 * @throws IOException The exception can be thrown when writing the content
 	 */
 	public static void saveFile(String filePath, String content)
 			throws IOException {
@@ -54,16 +52,15 @@ public class FileManager {
 
 
 	/**
-	 * Reads a textual file and returns its content.
-	 * 
-	 * @param f the textual file to be read.
-	 * @return the content of the file
+	 * Read a textual files's content and return it
+	 * @param file The file from which we want to read the text
+	 * @return The content of the file as a text
 	 */
-	public static String readFile(File f) {
+	public static String readFile(File file) {
 		try {
 			String contents = "";
 
-			BufferedReader input = new BufferedReader(new FileReader(f));
+			BufferedReader input = new BufferedReader(new FileReader(file));
 			
 			String line = input.readLine();
 			
@@ -88,23 +85,21 @@ public class FileManager {
 
 
 	/**
-	 * Creates a folder
-	 * 
-	 * @param dirName the folder path
-	 * @return true if created, false otherwise
+	 * Create a folder; if the parents of the folder doesn't exist, they will be created as well
+	 * @param folder The folder which we want to create
+	 * @return true: if the folder is created. false: if the folder exists 
+	 * or you haven't permission
 	 */
-	public static boolean createFolder(String dirName) {
+	public static boolean createFolder(File folder) {
 
-		File dir = new File(dirName);
-
-		if (dir.exists()) {
+		if (folder.exists()) {
 			System.err.println("The directory already exists");
 			// System.out.println("The directory already exists");
 			return false;
 		}
 
 		try {
-			dir.mkdirs();
+			folder.mkdirs();
 		} catch (SecurityException se) {
 			System.err.println("Can't create the directory!!");
 			//System.out.println("Can't create the directory!!");
@@ -116,12 +111,23 @@ public class FileManager {
 		return true;
 	}
 	
-	public static boolean deleteFolder(File dir, boolean force){
+	/**
+	 * Delete a folder with all its content
+	 * @param folder The folder which we want to delete
+	 * @param force if this is false and the folder has content, it won't be deleted
+	 * @return 
+	 * true: if the folder doesn't exist, or deleted successfully.<br>
+	 * false: if <ul>
+	 * <li>the target is a file and not a directory</li>
+	 * <li>if it has content and force is false</li>
+	 * </ul>
+	 */
+	public static boolean deleteFolder(File folder, boolean force){
 		
-		if (! dir.exists()) return false;
-		if (! dir.isDirectory()) return false;
+		if (! folder.exists()) return true;
+		if (! folder.isDirectory()) return false;
 		
-		File[] files = dir.listFiles();
+		File[] files = folder.listFiles();
 		
 		if (!force && files.length > 0) return false;
 		
@@ -132,7 +138,7 @@ public class FileManager {
 			}
 			file.delete();
 		}
-		dir.delete();
+		folder.delete();
 		return true;
 	}
 

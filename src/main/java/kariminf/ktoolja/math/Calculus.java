@@ -32,14 +32,16 @@ public class Calculus {
 
 	/**
 	 * Calculates the factorial of a natural number. 
-	 * If the number is less or equal to 1, it returns 1.
+	 * If the number is less than 0, it returns 0.
 	 * 
 	 * @param num a natural number
-	 * @return the factorial of this number
+	 * @return the factorial of this number; if the number is less than0, 0 is returned 
 	 */
 	public static int factorial(int num) {
 		
-		if (num <= 1) return 1;
+		if (num < 0) return 0;
+		
+		if (num == 0) return 1;
 		
 		int result = num * factorial(num - 1);
 
@@ -256,8 +258,8 @@ public class Calculus {
 	 * {1,2}, {1,3}, {2,3}}
 	 * </p>
 	 * 
-	 * @param size: The number of elements in our set
-	 * @param nbr: The number of maximum combinations, for example 2 elements, etc.
+	 * @param size The number of elements in our set
+	 * @param nbr The number of maximum combinations, for example 2 elements, etc.
 	 * @return a list containing lists of combinations
 	 */
 	public static List<List<Integer>> getCombinations(int size, int nbr) {
@@ -272,8 +274,6 @@ public class Calculus {
 	/**
 	 * Recursive method used to search different combinations of a set 
 	 * of elements starting from an element with a maximum number of combinations.
-	 *  
-	 * This method is used by {@link CalculusTest#getCombinations(int, int)}.
 	 * 
 	 * @param size the size of the elements set
 	 * @param start starting point
