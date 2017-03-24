@@ -24,8 +24,8 @@ public class FileManagerTest {
 	@Test
 	public void testCreateFolder() {
 		FileManager.deleteFolder(new File(tstFldr), true);
-		assertEquals(true, FileManager.createFolder(tstFldr));
-		assertFalse(FileManager.createFolder(tstFldr));
+		assertEquals(true, FileManager.createFolder(new File(tstFldr)));
+		assertFalse(FileManager.createFolder(new File(tstFldr)));
 	}
 	
 	@Test
