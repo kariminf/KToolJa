@@ -2,8 +2,10 @@
 
 [![Project](https://img.shields.io/badge/Project-KToolJa-4B0082.svg?style=plastic)](https://kariminf.github.com/KToolJa)
 [![Version](https://img.shields.io/badge/Version-1.0.0-4B0082.svg?style=plastic)](https://github.com/kariminf/AllSummarizer/releases)
-[![License](https://img.shields.io/badge/License-Apache--2.0-4B0082.svg?style=plastic)](http://www.apache.org/licenses/LICENSE-2.0)
+[![License](https://img.shields.io/badge/License-Apache_2-4B0082.svg?style=plastic)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Travis](https://img.shields.io/travis/kariminf/KToolJa.svg?style=plastic)](https://travis-ci.org/kariminf/KToolJa)
+[![codecov](https://img.shields.io/codecov/c/github/kariminf/KToolJa.svg?style=plastic)](https://codecov.io/gh/kariminf/KToolJa)
+
 
 **Karim Tools Java kit**
 
