@@ -1,10 +1,10 @@
 # KToolJa
 
 [![Project](https://img.shields.io/badge/Project-KToolJa-4B0082.svg?style=plastic)](https://kariminf.github.com/KToolJa)
-[![Version](https://img.shields.io/badge/Version-1.0.0-4B0082.svg?style=plastic)](https://github.com/kariminf/AllSummarizer/releases)
 [![License](https://img.shields.io/badge/License-Apache_2-4B0082.svg?style=plastic)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Travis](https://img.shields.io/travis/kariminf/KToolJa.svg?style=plastic)](https://travis-ci.org/kariminf/KToolJa)
 [![codecov](https://img.shields.io/codecov/c/github/kariminf/KToolJa.svg?style=plastic)](https://codecov.io/gh/kariminf/KToolJa)
+[![jitpack](https://jitpack.io/v/kariminf/KToolJa.svg)](https://jitpack.io/#kariminf/KToolJa)
 
 
 **Karim Tools Java kit**
@@ -15,6 +15,43 @@ Used to back the other projects with tools such as:
 * Simple plugins management
 These tools can be found in other libraries, but in this project a lighter version of
 what we need is enough.
+
+## Using the project
+
+You can download the jar from "release" section and link it to your project;
+Or you can use https://jitpack.io to manage dependency.
+Replace "tag" with the release tag; for example "1.0.0".
+
+### Gradle
+
+Add this to your "build.gradle":
+```
+repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile 'com.github.kariminf:KToolJa:tag'
+}
+```
+
+### Maven
+
+```xml
+<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+</repositories>
+
+<dependency>
+	    <groupId>com.github.kariminf</groupId>
+	    <artifactId>KToolJa</artifactId>
+	    <version>tag</version>
+</dependency>
+```
 
 ## License
 
