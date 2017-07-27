@@ -1,10 +1,10 @@
 # KToolJa
 
-[![Project](https://img.shields.io/badge/Project-KToolJa-4B0082.svg?style=plastic)](https://kariminf.github.com/KToolJa)
+[![Project](https://img.shields.io/badge/Project-K--ToolJa-4B0082.svg?style=plastic)](https://kariminf.github.com/k-toolja)
 [![License](https://img.shields.io/badge/License-Apache_2-4B0082.svg?style=plastic)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Travis](https://img.shields.io/travis/kariminf/KToolJa.svg?style=plastic)](https://travis-ci.org/kariminf/KToolJa)
-[![codecov](https://img.shields.io/codecov/c/github/kariminf/KToolJa.svg?style=plastic)](https://codecov.io/gh/kariminf/KToolJa)
-[![jitpack](https://jitpack.io/v/kariminf/KToolJa.svg)](https://jitpack.io/#kariminf/KToolJa)
+[![Travis](https://img.shields.io/travis/kariminf/k-toolja.svg?style=plastic)](https://travis-ci.org/kariminf/k-toolja)
+[![codecov](https://img.shields.io/codecov/c/github/kariminf/k-toolja.svg?style=plastic)](https://codecov.io/gh/kariminf/k-toolja)
+[![jitpack](https://jitpack.io/v/kariminf/k-toolja.svg)](https://jitpack.io/#kariminf/k-toolja)
 
 
 **Karim Tools Java kit**
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.kariminf:KToolJa:tag'
+    compile 'com.github.kariminf:k-toolja:tag'
 }
 ```
 
@@ -48,7 +48,7 @@ dependencies {
 
 <dependency>
 	    <groupId>com.github.kariminf</groupId>
-	    <artifactId>KToolJa</artifactId>
+	    <artifactId>k-toolja</artifactId>
 	    <version>tag</version>
 </dependency>
 ```
